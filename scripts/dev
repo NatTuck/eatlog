@@ -1,0 +1,25 @@
+#!/bin/bash
+set -e
+
+SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
+
+cd "$SCRIPT_DIR/../assets"
+pnpm run dev &
+VITE_PID=$!
+
+cleanup() {
+  kill $VITE_PID 2>/dev/null || true
+  exit 0
+}
+trap cleanup SIGINT SIGTERM
+
+echo "Waiting for Vite to start..."
+while ! nc -z localhost 3000 2>/dev/null; do
+  sleep 0.5
+done
+echo "Vite ready on http://localhost:3000"
+echo "Phoenix running on http://localhost:4000"
+
+cd "$SCRIPT_DIR/.."
+mix phx.server
+cleanup

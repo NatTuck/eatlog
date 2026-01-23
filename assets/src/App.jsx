@@ -1,13 +1,18 @@
-import Counter from './components/Counter';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Layout from './components/Layout';
+import Login from './components/Login';
+import Dashboard from './components/Dashboard';
 
 function App() {
   return (
-    <div style={{ padding: '2rem', fontFamily: 'system-ui, sans-serif' }}>
-      <h1 style={{ fontSize: '1.5rem', fontWeight: 'bold', marginBottom: '1rem' }}>
-        EatLog
-      </h1>
-      <Counter />
-    </div>
+    <Router>
+      <Routes>
+        <Route path="/" element={<Layout />}>
+          <Route index element={<Dashboard />} />
+          <Route path="login" element={<Login />} />
+        </Route>
+      </Routes>
+    </Router>
   );
 }
 

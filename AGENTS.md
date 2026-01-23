@@ -2,6 +2,12 @@
 
 This is a Phoenix backend with a React SPA frontend. Phoenix serves as an API-only backend; React handles all UI rendering.
 
+## Guidelines for dev tools
+
+- Don't run the dev server. Assume the user is running it or will run it
+manually.
+- If the dev server needs to be restarted, tell the user, don't try to do it.
+
 ### Architecture overview
 
 ```
@@ -106,6 +112,7 @@ eatlog/
 ### Frontend details (assets/)
 
 **Entry point chain:**
+
 ```
 index.html
   └─→ src/main.jsx
@@ -114,12 +121,14 @@ index.html
 ```
 
 **Key files:**
+
 - `src/main.jsx` - React 18 entry with `createRoot`
 - `src/App.jsx` - Root component, imports all features
 - `assets/css/app.css` - Tailwind v4 imports (minimal, mostly directives)
 - `vite.config.js` - React plugin, PWA plugin, proxy config
 
 **Dependencies:**
+
 - React 18.3 (UI library)
 - Vite 5.4 (build tool / dev server)
 - Tailwind CSS 3.4 (styling)
@@ -128,6 +137,7 @@ index.html
 ### Backend details (lib/)
 
 **Request flow:**
+
 ```
 HTTP Request → Endpoint → Router → Controller → JSON response
                                           ↓
@@ -137,6 +147,7 @@ HTTP Request → Endpoint → Router → Controller → JSON response
 ```
 
 **Phoenix Channels (WebSocket):**
+
 ```
 Browser → UserSocket.connect() → RoomChannel.join("room:lobby")
                                     ↓

@@ -9,3 +9,7 @@
 #
 # We recommend using the bang functions (`insert!`, `update!`
 # and so on) as they will fail if something goes wrong.
+
+alias EatLog.Users
+
+{:ok, _user} = Users.create_user(%{login: "nat", password: "bacon88"})

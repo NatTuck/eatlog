@@ -1,0 +1,15 @@
+defmodule EatLog.Repo.Migrations.CreateUsers do
+  use Ecto.Migration
+
+  def change do
+    create table(:users) do
+      add :login, :string, null: false
+      add :pass_hash, :string, null: false
+      add :settings, :map, null: false, default: %{}
+
+      timestamps(type: :utc_datetime)
+    end
+
+    create unique_index(:users, :login)
+  end
+end

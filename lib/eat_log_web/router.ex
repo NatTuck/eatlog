@@ -10,6 +10,12 @@ defmodule EatLogWeb.Router do
     plug :accepts, ["json"]
   end
 
+  scope "/api/v1", EatLogWeb do
+    pipe_through :api
+
+    post "/sessions", SessionsController, :create
+  end
+
   scope "/", EatLogWeb do
     pipe_through :browser
     get "/*path", FallbackController, :index
